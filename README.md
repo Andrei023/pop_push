@@ -13,7 +13,7 @@ Then you can go through the process of:
 You need Maven in order to run the tests on your machine.
 
 Go to the folder containing pom.xml:
-cd pop_push-master
+- cd pop_push-master
 
 Now you have various options, i.e.
 
@@ -27,3 +27,6 @@ Or run a particular test:
 Examples:
 - mvn clean test -Dtest=eu.heisenbug.product.QuickPopMultiThreadingTest
 - mvn clean test -Dtest=eu.heisenbug.product.QuickPushLogicTest#GIVEN_quickPushStringAtoZ_WHEN_popFromMultipleElementList_THEN_maxIsPopped
+
+
+NB: Developed and tested on Ubuntu 20.04 with Java 11.0.16 and Apache Maven 3.6.3.
