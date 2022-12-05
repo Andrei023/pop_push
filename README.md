@@ -1,7 +1,12 @@
 # To run the Console
 You need Java 11 on your machine.
 
-java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.Console
+If you have novidea-1.0-SNAPSHOT.jar in {YOUR_PATH}/pop_push-master/target, then:
+- java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.Console
+
+If you don't have the jar, then:
+- mvn clean package
+- java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.Console
 
 Then you can go through the process of:
 - selecting element type (Integer or String)
