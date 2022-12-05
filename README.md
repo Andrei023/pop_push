@@ -18,12 +18,12 @@ cd pop_push-master
 Now you have various options, i.e.
 
 Run all tests:
-mvn clean test
+- mvn clean test
 
 Or run a particular test:
-mvn clean test -Dtest=your.package.TestClassName
-mvn clean test -Dtest=your.package.TestClassName#particularMethod
+- mvn clean test -Dtest=your.package.TestClassName
+- mvn clean test -Dtest=your.package.TestClassName#particularMethod
 
 Examples:
-mvn clean test -Dtest=eu.heisenbug.product.QuickPopMultiThreadingTest
-mvn clean test -Dtest=eu.heisenbug.product.QuickPushLogicTest#GIVEN_quickPushStringAtoZ_WHEN_popFromMultipleElementList_THEN_maxIsPopped
+- mvn clean test -Dtest=eu.heisenbug.product.QuickPopMultiThreadingTest
+- mvn clean test -Dtest=eu.heisenbug.product.QuickPushLogicTest#GIVEN_quickPushStringAtoZ_WHEN_popFromMultipleElementList_THEN_maxIsPopped
