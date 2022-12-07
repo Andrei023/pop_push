@@ -1,6 +1,5 @@
 package eu.heisenbug.console.factory;
 
-import eu.heisenbug.console.constants.DataType;
 import eu.heisenbug.console.constants.OrderStrategy;
 import eu.heisenbug.console.constants.ProductType;
 import eu.heisenbug.product.AbstractOrderedList;
@@ -16,26 +15,22 @@ public class ProductFactory {
     private ProductFactory() {
     }
 
-    public static AbstractOrderedList getProduct(ProductType productType, DataType dataType,
-                                                    OrderStrategy orderStrategy) {
-        if (DataType.INTEGER.equals(dataType)) {
-            if (OrderStrategy.ASCENDING.equals(orderStrategy)) {
-                return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new IntegerMinimum()) :
-                        new QuickPushOrderedList<>(new IntegerMinimum());
-            } else if (OrderStrategy.DESCENDING.equals(orderStrategy)) {
-                return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new IntegerMaximum()) :
-                        new QuickPushOrderedList<>(new IntegerMaximum());
-            }
+    public static AbstractOrderedList<Integer> getIntegerProduct(ProductType productType, OrderStrategy orderStrategy) {
+        if (OrderStrategy.ASCENDING.equals(orderStrategy)) {
+            return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new IntegerMinimum()) :
+                    new QuickPushOrderedList<>(new IntegerMinimum());
         }
-        if (DataType.STRING.equals(dataType)) {
-            if (OrderStrategy.ASCENDING.equals(orderStrategy)) {
-                return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new StringAtoZ()) :
-                        new QuickPushOrderedList<>(new StringAtoZ());
-            } else if (OrderStrategy.DESCENDING.equals(orderStrategy)) {
-                return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new StringZtoA()) :
-                        new QuickPushOrderedList<>(new StringZtoA());
-            }
+        return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new IntegerMaximum()) :
+                new QuickPushOrderedList<>(new IntegerMaximum());
+
+    }
+
+    public static AbstractOrderedList<String> getStringProduct(ProductType productType, OrderStrategy orderStrategy) {
+        if (OrderStrategy.ASCENDING.equals(orderStrategy)) {
+            return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new StringAtoZ()) :
+                    new QuickPushOrderedList<>(new StringAtoZ());
         }
-        return null;
+        return ProductType.QUICK_POP.equals(productType) ? new QuickPopOrderedList<>(new StringZtoA()) :
+                new QuickPushOrderedList<>(new StringZtoA());
     }
 }

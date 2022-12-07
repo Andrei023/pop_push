@@ -86,11 +86,11 @@ public class Console {
             System.out.print("Invalid option. Try again: ");
         }
 
-        AbstractOrderedList<?> product = ProductFactory.getProduct(productType, dataType, orderStrategy);
-
-        if (product == null) {
-            System.out.println("Error encountered: product is null.");
-            return;
+        AbstractOrderedList<?> product;
+        if (DataType.INTEGER.equals(dataType)) {
+            product = ProductFactory.getIntegerProduct(productType, orderStrategy);
+        } else {
+            product = ProductFactory.getStringProduct(productType, orderStrategy);
         }
 
         System.out.println("Created product " + productType.getLabel().toUpperCase() + " with data type " + dataType +
