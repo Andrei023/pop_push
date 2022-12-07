@@ -2,11 +2,11 @@
 You need Java 11 on your machine.
 
 If you have novidea-1.0-SNAPSHOT.jar in {YOUR_PATH}/pop_push-master/target, then:
-- java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.Console
+- java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.console.Console
 
 If you don't have the jar, then:
 - mvn clean package
-- java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.Console
+- java -cp {YOUR_PATH}/pop_push-master/target/novidea-1.0-SNAPSHOT.jar eu.heisenbug.console.Console
 
 Then you can go through the process of:
 - selecting element type (Integer or String)
