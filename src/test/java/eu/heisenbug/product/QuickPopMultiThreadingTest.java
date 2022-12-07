@@ -1,10 +1,6 @@
 package eu.heisenbug.product;
 
-
-import eu.heisenbug.constants.DataType;
-import eu.heisenbug.constants.OrderStrategy;
-import eu.heisenbug.constants.ProductType;
-import eu.heisenbug.factory.ProductFactory;
+import eu.heisenbug.console.sort.IntegerMaximum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,22 +11,21 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
+import static eu.heisenbug.util.ListHelper.getElements;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class QuickPopMultiThreadingTest {
+class QuickPopMultiThreadingTest {
 
-    AbstractOrderedList<?> underTest;
+    AbstractOrderedList<Integer> underTest;
 
     @BeforeEach
     void init() {
-        underTest = ProductFactory.getProduct(ProductType.QUICK_POP, DataType.INTEGER, OrderStrategy.DESCENDING);
-        assertNotNull(underTest);
+        underTest = new QuickPopOrderedList<>(new IntegerMaximum());
     }
 
     @Test
-    public void GIVEN_quickPop_WHEN_multipleThreadsRun_THEN_elementsAreStoredInOrder() {
+    void GIVEN_quickPop_WHEN_multipleThreadsRun_THEN_elementsAreStoredInOrder() {
         final CountDownLatch latch = new CountDownLatch(1);
         int threads = 50;
         int elementsPushedPerThread = 200;
@@ -49,7 +44,7 @@ public class QuickPopMultiThreadingTest {
                 }
                 Random random = new Random();
                 for (int j = 0; j < elementsPushedPerThread; j++) {
-                    underTest.push(underTest.getSortAlgorithm().parseElement(String.valueOf(random.nextInt())));
+                    underTest.push(random.nextInt());
                 }
                 for (int j = 0; j < elementsPoppedPerThread; j++) {
                     underTest.pop();
@@ -74,7 +69,7 @@ public class QuickPopMultiThreadingTest {
         }
 
         // get all elements
-        String result = underTest.getElements();
+        String result = getElements(underTest.getHead());
 
         // remove '[' and ']' and split by ', '
         List<Integer> elements = Arrays.stream(result.substring(1, result.length() - 1).split(", "))

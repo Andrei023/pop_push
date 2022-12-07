@@ -1,12 +1,14 @@
-package eu.heisenbug;
+package eu.heisenbug.console;
 
-import eu.heisenbug.constants.DataType;
-import eu.heisenbug.constants.OrderStrategy;
-import eu.heisenbug.constants.ProductType;
-import eu.heisenbug.factory.ProductFactory;
+import eu.heisenbug.console.constants.DataType;
+import eu.heisenbug.console.constants.OrderStrategy;
+import eu.heisenbug.console.constants.ProductType;
+import eu.heisenbug.console.factory.ProductFactory;
 import eu.heisenbug.product.AbstractOrderedList;
 
 import java.util.Scanner;
+
+import static eu.heisenbug.util.ListHelper.printElements;
 
 public class Console {
 
@@ -21,6 +23,7 @@ public class Console {
         System.out.print("Choose your data type: ");
 
         DataType dataType;
+        Class classType;
         while (true) {
             nextLine = scanner.nextLine();
             if (nextLine.equals("q")) {
@@ -28,10 +31,12 @@ public class Console {
             }
             if (nextLine.equals("1")) {
                 dataType = DataType.INTEGER;
+                classType = Integer.class;
                 break;
             }
             if (nextLine.equals("2")) {
                 dataType = DataType.STRING;
+                classType = String.class;
                 break;
             }
             System.out.print("Invalid option. Try again: ");
@@ -107,18 +112,27 @@ public class Console {
                     if (element != null) {
                         System.out.println(element + " popped.");
                     }
-                    product.printElements();
+                    printElements(product.getHead());
                     break;
                 case "2":
                     System.out.print("Element: ");
                     String input = scanner.nextLine();
-                    product.push(product.getSortAlgorithm().parseElement(input));
-                    product.printElements();
+                    pushFromConsole(input, classType, product);
+                    printElements(product.getHead());
                     break;
                 default:
                     System.out.println("Invalid option. Try again: ");
                     break;
             }
+        }
+    }
+
+    private static void pushFromConsole(String element, Class type, AbstractOrderedList<?> product) {
+        if (type == Integer.class) {
+            ((AbstractOrderedList<Integer>) product).push(Integer.valueOf(element));
+        }
+        if (type == String.class) {
+            ((AbstractOrderedList<String>) product).push(element);
         }
     }
 }

@@ -1,4 +1,4 @@
-package eu.heisenbug.constants;
+package eu.heisenbug.console.constants;
 
 public enum OrderStrategy {
     ASCENDING("ascending"),

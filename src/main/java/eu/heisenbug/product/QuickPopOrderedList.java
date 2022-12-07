@@ -1,11 +1,12 @@
 package eu.heisenbug.product;
 
 import eu.heisenbug.list.Node;
-import eu.heisenbug.sort.AbstractComparator;
+
+import java.util.Comparator;
 
 public class QuickPopOrderedList<T> extends AbstractOrderedList<T> {
 
-    public QuickPopOrderedList(AbstractComparator<T> sortAlgorithm) {
+    public QuickPopOrderedList(Comparator<T> sortAlgorithm) {
         this.sortAlgorithm = sortAlgorithm;
     }
 

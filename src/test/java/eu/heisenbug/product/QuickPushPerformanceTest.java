@@ -1,35 +1,31 @@
 package eu.heisenbug.product;
 
-import eu.heisenbug.constants.DataType;
-import eu.heisenbug.constants.OrderStrategy;
-import eu.heisenbug.constants.ProductType;
-import eu.heisenbug.factory.ProductFactory;
-import eu.heisenbug.sort.AbstractComparator;
+import eu.heisenbug.console.sort.IntegerMaximum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
+import static eu.heisenbug.util.ListHelper.getElements;
+import static eu.heisenbug.util.ListHelper.printElements;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class QuickPushPerformanceTest {
+class QuickPushPerformanceTest {
 
-    AbstractOrderedList<?> underTest;
+    AbstractOrderedList<Integer> underTest;
 
     @BeforeEach
     void init() {
-        underTest = ProductFactory.getProduct(ProductType.QUICK_PUSH, DataType.INTEGER, OrderStrategy.DESCENDING);
-        assertNotNull(underTest);
+        underTest = new QuickPushOrderedList<>(new IntegerMaximum());
     }
 
     @Test
-    public void WHEN_quickPush_pushIsTwoOrdersOfMagnitudeFasterThanPop() {
+    void WHEN_quickPush_pushIsTwoOrdersOfMagnitudeFasterThanPop() {
         int n = 50000;
         Random random = new Random();
         long startTime = System.nanoTime();
         for (int i = 1; i <= n; i++) {
-            underTest.push(this.getSort().parseElement(String.valueOf(random.nextInt())));
+            underTest.push(random.nextInt());
         }
         long endTime = System.nanoTime();
         long durationPush = (endTime - startTime);
@@ -43,11 +39,7 @@ public class QuickPushPerformanceTest {
         long durationPop = (endTime2 - startTime2);
         System.out.println("Time to pop " + n + " elements " + (double) durationPop / 1000000000);
 
-        underTest.printElements();
-        assertEquals("[]", underTest.getElements());
-    }
-
-    private AbstractComparator<?> getSort() {
-        return underTest.getSortAlgorithm();
+        printElements(underTest.getHead());
+        assertEquals("[]", getElements(underTest.getHead()));
     }
 }

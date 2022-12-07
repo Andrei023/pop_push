@@ -1,11 +1,12 @@
 package eu.heisenbug.product;
 
 import eu.heisenbug.list.Node;
-import eu.heisenbug.sort.AbstractComparator;
+
+import java.util.Comparator;
 
 public class QuickPushOrderedList<T> extends AbstractOrderedList<T> {
 
-    public QuickPushOrderedList(AbstractComparator<T> sortAlgorithm) {
+    public QuickPushOrderedList(Comparator<T> sortAlgorithm) {
         this.sortAlgorithm = sortAlgorithm;
     }
 
@@ -27,7 +28,7 @@ public class QuickPushOrderedList<T> extends AbstractOrderedList<T> {
                 current = current.getNext();
             }
 
-            if (max.equals(this.getHead().getValue())) {
+            if (max.equals(super.getHead().getValue())) {
                 this.head = this.head.getNext();
             } else {
                 previousToPop.setNext(previousToPop.getNext().getNext());
@@ -41,9 +42,5 @@ public class QuickPushOrderedList<T> extends AbstractOrderedList<T> {
         synchronized (this.lock) {
             this.head = new Node<>(element, this.head);
         }
-    }
-
-    private Node<T> getHead() {
-        return this.head;
     }
 }

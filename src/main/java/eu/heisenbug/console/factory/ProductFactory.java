@@ -1,22 +1,22 @@
-package eu.heisenbug.factory;
+package eu.heisenbug.console.factory;
 
-import eu.heisenbug.constants.DataType;
-import eu.heisenbug.constants.OrderStrategy;
-import eu.heisenbug.constants.ProductType;
+import eu.heisenbug.console.constants.DataType;
+import eu.heisenbug.console.constants.OrderStrategy;
+import eu.heisenbug.console.constants.ProductType;
 import eu.heisenbug.product.AbstractOrderedList;
 import eu.heisenbug.product.QuickPopOrderedList;
 import eu.heisenbug.product.QuickPushOrderedList;
-import eu.heisenbug.sort.IntegerMaximum;
-import eu.heisenbug.sort.IntegerMinimum;
-import eu.heisenbug.sort.StringAtoZ;
-import eu.heisenbug.sort.StringZtoA;
+import eu.heisenbug.console.sort.IntegerMaximum;
+import eu.heisenbug.console.sort.IntegerMinimum;
+import eu.heisenbug.console.sort.StringAtoZ;
+import eu.heisenbug.console.sort.StringZtoA;
 
 public class ProductFactory {
 
     private ProductFactory() {
     }
 
-    public static AbstractOrderedList<?> getProduct(ProductType productType, DataType dataType,
+    public static AbstractOrderedList getProduct(ProductType productType, DataType dataType,
                                                     OrderStrategy orderStrategy) {
         if (DataType.INTEGER.equals(dataType)) {
             if (OrderStrategy.ASCENDING.equals(orderStrategy)) {

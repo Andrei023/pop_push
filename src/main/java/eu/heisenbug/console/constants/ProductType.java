@@ -1,4 +1,4 @@
-package eu.heisenbug.constants;
+package eu.heisenbug.console.constants;
 
 public enum ProductType {
     QUICK_POP("quick_pop"),
